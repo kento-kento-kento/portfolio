@@ -1,0 +1,78 @@
+{% extends 'webnote/base.html' %}
+
+{% block title %}Web基礎まとめサイト{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 30px;">
+    <a href="{% url 'portfolio_index' %}" class="btn">                  </a>
+</div>
+
+<h1 style="white-space: nowrap;">Web基礎まとめサイト</h1>
+<p>HTML / CSS / JavaScript の基礎文法をまとめたサイトです。</p>
+
+<div class="card">
+    <h2>HTML 基礎</h2>
+    <p>HTML の構造やタグの使い方を学べます。</p>
+    <a href="{% url 'webnote_html' %}" class="button">HTMLページへ</a>
+</div>
+
+<div class="card">
+    <h2>CSS 基礎</h2>
+    <p>CSS の書き方やスタイルの基本を学べます。</p>
+    <a href="{% url 'webnote_css' %}" class="button">CSSページへ</a>
+</div>
+
+<div class="card">
+    <h2>JavaScript 基礎</h2>
+    <p>JS の変数・関数・条件分岐などの基礎を学べます。</p>
+    <a href="{% url 'webnote_js' %}" class="button">JSページへ</a>
+</div>
+
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.overview h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    white-space: normal; /* nowrap を normal に変更して折り返し可能に */
+    word-break: break-word; /* 長い単語も折り返す */
+}
+
+.overview p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* ボタンリンク */
+.button, .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0984e3; /* 青色 */
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.2s;
+    margin-top: 10px;
+}
+
+.button:hover, .btn:hover {
+    background-color: #74b9ff;
+    transform: translateY(-2px);
+}
+
+/* カードの基本スタイル */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+</style>
+{% endblock %}
+

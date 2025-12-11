@@ -1,0 +1,53 @@
+{% extends 'webnote/base.html' %}
+
+{% block title %}HTML基礎 - Webnote{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h2>HTMLとは？</h2>
+    <p>Webページの構造を作るための言語です。</p>
+</div>
+
+<div class="card">
+    <h2>基本タグ</h2>
+    <ul>
+        <li>&lt;h1&gt;〜&lt;h6&gt; : 見出し</li>
+        <li>&lt;p&gt; : 段落</li>
+        <li>&lt;a href="URL"&gt; : リンク</li>
+        <li>&lt;img src="画像URL"&gt; : 画像</li>
+        <li>&lt;ul&gt;/&lt;ol&gt;/&lt;li&gt; : リスト</li>
+        <li>&lt;div&gt; : ブロック要素</li>
+        <li>&lt;span&gt; : インライン要素</li>
+        <li>&lt;form&gt; : フォーム</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>属性の例</h2>
+    <ul>
+        <li>href：リンク先</li>
+        <li>src：画像URL</li>
+        <li>alt：画像の代替テキスト</li>
+        <li>class / id：CSSやJSで指定する名前</li>
+        <li>rel：linkタグなどで関係を指定</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>サンプルコード</h2>
+    <pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;サンプルページ&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;こんにちは&lt;/h1&gt;
+    &lt;p&gt;HTMLの基礎ページです。&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+</div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'webnote/base.html' %}
+
+{% block title %}CSS基礎 - Webnote{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>CSSとは？</h2>
+    <p>HTMLの見た目を装飾する言語。色・文字サイズ・配置などを制御します。</p>
+</div>
+
+<div class="card">
+    <h2>セレクタの種類</h2>
+    <ul>
+        <li>タグセレクタ：p { color: red; }</li>
+        <li>クラスセレクタ：.classname { ... }</li>
+        <li>IDセレクタ：#idname { ... }</li>
+        <li>子孫セレクタ：div p { ... }</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>代表的なプロパティ</h2>
+    <ul>
+        <li>color：文字色</li>
+        <li>background-color：背景色</li>
+        <li>font-size：文字サイズ</li>
+        <li>margin / padding：外側/内側の余白</li>
+        <li>border：枠線</li>
+        <li>display：block / inline / flex / grid</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>サンプルコード</h2>
+    <pre><code>p {
+  color: #0984e3;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}</code></pre>
+</div>
+{% endblock %}

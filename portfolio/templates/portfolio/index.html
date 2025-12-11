@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポートフォリオ-ゲーム制作</title>
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+
+    <style>
+
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-weight: 500;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        
+        .card{
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);    
+        }
+
+        .project h2 {
+            margin-top: 0;
+            font-weight: 500;
+        }
+        .project p {
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>私のゲーム制作ポートフォリオ</h1>
+    </header>
+    <div class="container">
+        
+        <div class="card">
+            <h2>自己紹介</h2>
+            <p>
+                大学生。 ゲーム制作やウェブ開発などを学んでいる。
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>スキル</h2>
+            <ul>
+                <li>プログラミング言語: Python, JavaScript, C#</li>
+                <li>ゲームエンジン: Unity, Unreal Engine</li>
+                <li>ウェブ開発: HTML, CSS, Django</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2> Web基礎まとめサイト</h2>
+            <p>
+                HTML、CSS、JavaScriptの基礎をまとめたサイト。
+                &lt;body&gt; タグの意味や、rel属性の使い方などをまとめたサイト
+            </p>
+
+            <a href="/webnote/">Web基礎まとめサイトへ</a>
+        </div>
+
+        <div class="card">
+            <h2>ゲーム制作まとめ</h2>
+            <p>制作したゲームまとめ</p>
+
+            <ul>
+                <li>
+                    <strong>BLOCK PUZZLE</strong><br>
+                    使用技術:HTML / JavaScript / Canvas<br>
+                    定番のブロック配置型パズルゲーム
+
+                    <a href="/games/blockpuzzle/">BLOCK PUZZLE</a>
+                </li>
+                <br>
+                <li>
+                    <strong>構想中</strong><br>
+                    使用技術:構想中<br>
+                    内容:構想中
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+    <footer>
+        Ⓒ 2025 my portfolio
+    </footer>
+</body>
+</html>

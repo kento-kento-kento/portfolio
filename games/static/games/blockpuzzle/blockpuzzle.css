@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    background: #ffffff;
+}
+canvas {
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+}
+
+
+#ui-layer {
+    position: fixed;
+    inset: 0;               /* 画面全体に被せる */
+    pointer-events: none;   /* デフォルトで操作不可 */
+    z-index: 10000;         /* canvas より必ず上 */
+}
+
+/* UIレイヤー内で操作したいものだけ有効化 */
+#ui-layer a {
+    pointer-events: auto;
+}
+
+.back-portfolio {
+    position: fixed;      /* viewport に固定（絶対位置より安全） */
+    right: 24px;
+    bottom: 24px;
+
+    display: inline-block;
+    padding: 12px 18px;
+
+    background: rgba(60, 110, 237, 0.75);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 14px;
+
+    transition: background 0.2s, transform 0.2s;
+
+    pointer-events: auto; /* クリックを受け取る */
+    z-index: 10001;       /* #ui-layer (10000) より前面に */
+}
+
+
+.back-portfolio:hover {
+    background: rgba(60, 110, 237, 0.9);
+    transform: translateY(-2px);
+}
+
+
+
+#startBtn, #scoreBtn {
+    font-size: 32px;
+    padding: 20px 60px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#startBtn {
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 12px;
+}
+
+#scoreBtn {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    border-radius: 12px;
+}

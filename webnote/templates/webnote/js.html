@@ -1,0 +1,68 @@
+{% extends 'webnote/base.html' %}
+
+{% block title %}JavaScript基礎 - Webnote{% endblock %}
+
+{% block content %}
+{% if articles %}
+    {% for article in articles %}
+    <div class="card">
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+
+        {% if article.sample_html or article.sample_css or article.sample_js %}
+        <div class="anim-container">
+            {{ article.sample_html|safe }}
+            <style>
+                {{ article.sample_css|safe }}
+            </style>
+        </div>
+        <button onclick="runSample({{ forloop.counter }})">アニメーション再生</button>
+        <button onclick="toggleCode('code{{ forloop.counter }}',this)">コードを見る</button>
+        
+        <pre id="code{{ forloop.counter }}"><code>
+HTML:
+{{ article.sample_html|linebreaksbr }}
+CSS:
+{{ article.sample_css|linebreaksbr }}
+JS:
+{{ article.sample_js|linebreaksbr }}
+        </code></pre>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card">
+        <h2>サンプル記事はまだ登録されていません</h2>
+        <p>Django 管理画面から Article モデルに JS カテゴリの記事を登録してください。</p>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+
+function toggleCode(id, btn){
+    const pre = document.getElementById(id);
+    if(pre.style.display === 'block'){
+        pre.style.display = 'none';
+        btn.innerText = 'コードを見る';
+    } else {
+        pre.style.display = 'block';
+        btn.innerText = 'コードを閉じる';
+    }
+}
+
+
+// 記事ごとの JS を実行
+function runSample(num){
+    const card = document.getElementsByClassName('card')[num-1];
+    const scriptCode = card.querySelector('pre code').innerText.split('JS:')[1];
+    if(!scriptCode) return;
+    try {
+        new Function(scriptCode)();  // 動的にJSを実行
+    } catch(e){
+        console.error('JS実行エラー', e);
+    }
+}
+</script>
+{% endblock %}
