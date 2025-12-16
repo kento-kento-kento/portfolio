@@ -37,7 +37,7 @@ let gameState = GameState.TITLE;
 //=================タイマー============================
 
 let countdown = 3;
-let timeLimit = 181;
+let timeLimit =21;//////////////////////////////////////////////////
 let timeLeft = 0;
 
 
@@ -433,7 +433,7 @@ function drawBlockAt(shape,boardX,boardY,color){
 function getRandomBlockShape(){
     let shape;
 
-    if(score >= 15000 && Math.random() < 0.7){//スコア1.5万をこえたら70％の確率で変則ブロック追加
+    if(score >= 15000 && Math.random() < 1.0){//スコア1.5万をこえたら70％の確率で変則ブロック追加
         shape = ADVANCED_BLOCKS[Math.floor(Math.random() * ADVANCED_BLOCKS.length)];
     }else{
         shape = BLOCK_SHAPES[Math.floor(Math.random() * BLOCK_SHAPES.length)];
@@ -532,7 +532,7 @@ function drawGameOver(){
     ctx.fillRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle="white";
     ctx.font="50px sans-serif";
-    ctx.fillText("TIME UP!",300,250);
+    ctx.fillText("TIME UP!お疲れ様でした!",300,250);
     ctx.font="30px sans-serif";
     ctx.fillText(`SCORE: ${score}`,300,300);
 }
@@ -592,10 +592,82 @@ setInterval(() => {
         timeLeft--;
         if(timeLeft <= 0){
             gameState = GameState.GAMEOVER;
+            showGameOverUI();
         }
     }
 },1000);
 
+function showGameOverUI(){
+    const ui = document.getElementById("gameOverUI");
+    ui.style.display = "block";
+    document.getElementById("scoreText").textContent = `SCORE: ${score}`;
 
+    // ★ GameOverUI へ 1 秒後に自動スクロール
+    setTimeout(() => {
+        ui.scrollIntoView({behavior: "smooth"});
+    },1000);
+}
+
+function saveScore(){
+    const input = document.getElementById("playerName");
+    const name = input.value.trim();
+
+    if(!name){
+        alert("名前を入力してください！");
+        return;
+    }
+
+    const record = {
+        name:name,
+        score: score,
+        date:new Date().toLocaleString()
+    };
+
+    const history = JSON.parse(localStorage.getItem("scores") || "[]");
+    history.push(record);
+    localStorage.setItem("scores",JSON.stringify(history));
+
+    alert("成績を保存しました");
+
+    //保存後に入力欄クリア
+    input.value = "";
+
+    //保存ボタン無効化(連打防止)
+    const btn = document.querySelector("#gameOverUI button[onclick='saveScore()']");
+    btn.disabled = true;
+    btn.textContent = "保存済です";
+
+}
+
+function restartGame(){
+    document.getElementById("gameOverUI").style.display = "none";
+
+    //名前入力欄をクリア
+    const nameInput = document.querySelector("#playerName");
+    if(nameInput){
+        nameInput.value ="";
+    }
+
+    //保存ボタンを再び有効化
+    const saveBtn = document.querySelector("#saveScoreBtn");
+    if(saveBtn){
+        saveBtn.disabled = false;
+        saveBtn.textContent = "名前を登録する";
+    }
+
+    // ゲームの初期化
+    gameState = GameState.COUNTDOWN;
+    countdown = 3;
+
+    score = 0;
+    timeLeft = timeLimit;
+
+    bonusTexts = [];
+    selectedBlock = null;
+    
+    initBoard();
+    createHandBlocks();
+    
+}
 
 gameLoop();

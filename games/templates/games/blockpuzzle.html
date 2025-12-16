@@ -14,7 +14,41 @@
     <canvas id="gameCanvas" width="1100" height="400"></canvas>
 
     <button id ="startBtn">START!</button>
-    <button id ="scoreBtn">成績一覧</button>
+    <button id ="scoreBtn" onclick="location.href='{% url 'scores' %}'">成績一覧</button>
+
+
+    <div id="gameOverUI" style="
+        display:none;
+        text-align:center;
+        margin-top:20px;
+        background:rgba(0,0,0,0.6);
+        color:white;
+        padding:20px;
+        width:500px;
+        margin-left:auto;
+        margin-right:auto;
+        border-radius:10px;
+    ">
+        <h2>TIME UP! お疲れ様でした！</h2>
+        <p id="scoreText"></p>
+
+        <!-- 名前入力フォーム -->
+        <input type="text" id="playerName" placeholder="名前を入力" 
+            style="padding:8px; font-size:16px; width:60%; border-radius:5px;">
+        <br><br>
+
+        <button id="saveScoreBtn" onclick="saveScore()" 
+            style="padding:10px 20px; font-size:16px; border-radius:8px;">
+            名前を登録する
+        </button>
+
+        <br><br>
+
+        <button onclick="restartGame()" 
+            style="padding:10px 20px; font-size:16px; border-radius:8px;">
+            もう一度プレイする
+        </button>
+    </div>
 
     <!-- UI専用レイヤー -->
     <div id="ui-layer">

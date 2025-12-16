@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>成績一覧</title>
+
+    <style>
+    body {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+        background-size: 300% 300%;
+        animation: bgAnimation 12s infinite alternate;
+        color: #333;
+        font-family: "Trebuchet MS", sans-serif;
+        text-align: center;
+        padding-top: 40px;
+    }
+
+    @keyframes bgAnimation {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    h1 {
+        font-size: 42px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px #00000080;
+    }
+
+    table {
+        width: 70%;
+        margin: auto;
+        border-collapse: collapse;
+        background: #ffffffdd;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    th {
+        padding: 14px;
+        font-size: 20px;
+        background: #ffb6c1; /* パステルピンク */
+        color: #333;
+    }
+
+    td {
+        padding: 12px;
+        font-size: 18px;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+    }
+
+    tr:nth-child(even) td {
+        background: #ffe4ec;
+    }
+
+    tr:hover td {
+        background: #c1e1ff; /* ホバー時に優しい青 */
+        transition: 0.2s;
+    }
+
+    .back-btn {
+        margin-top: 30px;
+        padding: 12px 24px;
+        font-size: 20px;
+        background: #9e80ffff;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .back-btn:hover {
+        background: #c4ff99ff;
+        transform: scale(1.05);
+        transition: 0.2s;
+    }
+</style>
+
+</head>
+<body>
+
+    <h1>成績一覧</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>スコア</th>
+                <th>日付</th>
+            </tr>
+        </thead>
+        <tbody id="scoreTableBody">
+            <!-- JSで読み込む -->
+        </tbody>
+    </table>
+
+    <a href="{% url 'blockpuzzle' %}" class="back-btn">ゲームへ戻る</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let scores = JSON.parse(localStorage.getItem("scores") || "[]");
+
+            // スコア降順にソート
+            scores.sort((a, b) => b.score - a.score);
+
+            const tbody = document.getElementById("scoreTableBody");
+
+            if (scores.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="3">まだ成績がありません</td>
+                    </tr>`;
+                return;
+            }
+
+            scores.forEach(s => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${s.name}</td>
+                    <td>${s.score}</td>
+                    <td>${s.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    </script>
+
+</body>
+</html>
