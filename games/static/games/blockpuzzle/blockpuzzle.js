@@ -1,3 +1,8 @@
+//AI生成のため
+import { logMove, initPlayLog, playLog } from "./analytics/playLogger.js";
+import { requestAIAnalysis } from "../ai/aiClient.js";
+import { buildSummary } from "./analytics/summary.js";
+
 //===============基本設計================
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -22,6 +27,8 @@ let score = 0;
 let bonusTexts = [];//ボーナス用配列
 
 let hue = 0;//色相
+
+let aiRequested = false; //AI分析の二重実行防止
 
 //=================ゲーム状態============================
 
@@ -405,6 +412,14 @@ function placeBlock(block, boardX, boardY){
     score += 200;
 
     clearFullLinesAndColumns();
+
+    logMove({
+        type:"place",
+        board:JSON.parse(JSON.stringify(board)), //スナップショット
+        blockShape: block.shape,
+        position: {x: boardX, y:boardY },
+        time: timeLeft
+    });
 }
 
 //手持ちエリアのガイド
@@ -583,8 +598,10 @@ setInterval(() => {
             timeLeft = timeLimit;
             score = 0;
             bonusTexts = [];
+
             initBoard();
             createHandBlocks();
+            initPlayLog();
         }
     }
 
@@ -593,6 +610,7 @@ setInterval(() => {
         if(timeLeft <= 0){
             gameState = GameState.GAMEOVER;
             showGameOverUI();
+            onGameEnd();
         }
     }
 },1000);
@@ -640,6 +658,7 @@ function saveScore(){
 }
 
 function restartGame(){
+    aiRequested = false;
     document.getElementById("gameOverUI").style.display = "none";
 
     //名前入力欄をクリア
@@ -671,3 +690,22 @@ function restartGame(){
 }
 
 gameLoop();
+
+function onGameEnd() {
+    if(aiRequested)return;
+    aiRequested = true;
+    const summary = buildSummary(playLog);
+
+    requestAIAnalysis(summary)
+        .then(analysis => {
+            document.getElementById("ai-analysis-text").textContent = analysis;
+        })
+        .catch(err => {
+            document.getElementById("ai-analysis-text").textContent =
+                "AI分析の取得に失敗しました";
+            console.error(err);
+        });
+}
+
+window.draw = draw;
+window.gameLoop = gameLoop;

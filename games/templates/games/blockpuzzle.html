@@ -32,6 +32,24 @@
         <h2>TIME UP! お疲れ様でした！</h2>
         <p id="scoreText"></p>
 
+        <hr style="margin:20px 0;">
+
+    <h3 style="margin-bottom:10px;">🧠 AIプレイ分析</h3>
+
+    <pre id="ai-analysis-text" style="
+        text-align:left;
+        white-space:pre-wrap;
+        background:rgba(255,255,255,0.1);
+        padding:12px;
+        border-radius:8px;
+        font-size:14px;
+        max-height:200px;
+        overflow-y:auto;
+    ">
+    AI分析を生成中です...
+    </pre>
+
+
         <!-- 名前入力フォーム -->
         <input type="text" id="playerName" placeholder="名前を入力" 
             style="padding:8px; font-size:16px; width:60%; border-radius:5px;">
@@ -58,13 +76,15 @@
     </div>
 
     <script src="{% static 'games/blockpuzzle/title.js' %}"></script>
-    <script src="{% static 'games/blockpuzzle/blockpuzzle.js' %}"></script>
+    <script type="module" src="{% static 'games/blockpuzzle/blockpuzzle.js' %}"></script>
 
     <script>
         window.addEventListener("load", () => {
             draw();
         });
     </script>
+
+
 
 </body>
 </html>
