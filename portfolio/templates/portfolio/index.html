@@ -1,3 +1,4 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,47 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
 
-    <style>
-
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-weight: 500;
-        }
-        .container {
-            width: 80%;
-            margin: 20px auto;
-        }
-        
-        .card{
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);    
-        }
-
-        .project h2 {
-            margin-top: 0;
-            font-weight: 500;
-        }
-        .project p {
-            font-weight: 300;
-        }
-    </style>
 </head>
 <body>
     <header>
@@ -67,7 +29,7 @@
             <h2>スキル</h2>
             <ul>
                 <li>プログラミング言語: Python, JavaScript, C#</li>
-                <li>ゲームエンジン: Unity, Unreal Engine</li>
+                <li>ゲームエンジン: Unity</li>
                 <li>ウェブ開発: HTML, CSS, Django</li>
             </ul>
         </div>
@@ -86,28 +48,32 @@
             <h2>ゲーム制作まとめ</h2>
             <p>制作したゲームまとめ</p>
 
-            <ul>
-                <li>
+            <ul class="game-list">
+                <li class="game-item">
                     <strong>BLOCK PUZZLE</strong><br>
-                    使用技術:HTML / JavaScript / Canvas<br>
-                    定番のブロック配置型パズルゲーム
+                        使用技術: HTML / JavaScript / Canvas<br>
+                        ブロック配置型パズルゲーム<br><br>
 
-                    <a href="/games/blockpuzzle/">BLOCK PUZZLE</a>
+                    <a href="/games/blockpuzzle/" class="game-button">
+                        BLOCK PUZZLE
+                    </a>
                 </li>
-                <br>
-                <li>
-                    <strong>構想中</strong><br>
-                    使用技術:構想中<br>
-                    内容:構想中
-                </li>
+
+                <li class="game-item">
+                    <strong>ビリヤードゲーム</strong><br>
+                        使用技術: Unity / C# / WebGL<br>
+                        Unityで制作したビリヤードゲームをブラウザ上でプレイ可能<br><br>
+
+                        <a href="/games/billiard/" class="game-button">
+                            ビリヤードゲームをプレイする
+                        </a>
+                    </li>
             </ul>
         </div>
 
 
-    </div>
-
     <footer>
-        Ⓒ 2025 my portfolio
+        <p>Ⓒ 2025 my portfolio</p>
     </footer>
 </body>
 </html>

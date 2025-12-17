@@ -6,3 +6,6 @@ def blockpuzzle(request):
 
 def score_view(request):
     return render(request,"games/scores.html")
+
+def billiard(request):
+    return render(request,'games/billiard.html')
