@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>あなたのメモ一覧 - MemoApp</title>
+    <style>
+
+        .footer-text {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .back-login {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e5e7eb; /* 薄いグレー */
+            color: #374151;      /* 落ち着いた文字色 */
+            border-radius: 9999px; /* まるいボタン */
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+
+        .back-login:hover {
+            background: #d1d5db;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+
+        .back-portfolio {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(60, 110, 237, 0.8);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            z-index: 1000; 
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .add-memo-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            background: #4f46e5;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .memo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .memo-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 16px;
+            width: 300px;
+            position: relative;
+        }
+
+        .memo-actions a {
+            color: #4f46e5;
+            text-decoration: none;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function confirmDelete() {
+            return confirm('本当にこのメモを削除しますか？');
+        }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>あなたのメモ一覧</h1>
+    <a href="{% url 'memoapp:add_memo' %}" class="add-memo-btn">
+        新しいメモを作成
+    </a>
+</header>
+
+<div class="memo-list">
+    {% for memo in memos %}
+        <div class="memo-card">
+            <strong>{{ memo.title }}</strong>
+            <p>{{ memo.content|safe }}</p>
+
+            <small>
+                更新日: {{ memo.updated_at|date:"Y/m/d H:i" }}
+            </small>
+
+            <div class="memo-actions">
+                <!-- 編集：GETパラメータで渡す -->
+                <a href="{% url 'memoapp:add_memo' %}?id={{ memo.id }}">
+                    編集
+                </a>
+
+                <!-- 削除：即削除 -->
+                <a href="{% url 'memoapp:delete_memo' memo.id %}"
+                   onclick="return confirmDelete();">
+                    削除
+                </a>
+            </div>
+        </div>
+    {% empty %}
+        <p>まだメモはありません。</p>
+    {% endfor %}
+
+    <div id="ui-layer">
+        <a href="{% url 'portfolio_index' %}" class="back-portfolio">
+            ポートフォリオに戻る
+        </a>
+    </div>
+
+    <div class="footer-text">
+        <a href="{% url 'login' %}" class="back-login">
+            ログイン画面に戻る
+        </a>
+    </div>
+
+
+</div>
+
+</body>
+</html>

@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include('portfolio.urls')),
     path('webnote/', include('webnote.urls')),
     path('games/', include('games.urls')),
+    path('memo/', include('memoapp.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

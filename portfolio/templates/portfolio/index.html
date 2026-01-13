@@ -38,15 +38,15 @@
             <h2> Web基礎まとめサイト</h2>
             <p>
                 HTML、CSS、JavaScriptの基礎をまとめたサイト。
-                &lt;body&gt; タグの意味や、rel属性の使い方などをまとめたサイト
+                &lt;body&gt; タグの意味や、rel属性の使い方などをまとめた.
+
             </p>
 
-            <a href="/webnote/">Web基礎まとめサイトへ</a>
+            <a href="/webnote/" class="game-button">Web基礎まとめサイトへ</a>
         </div>
 
         <div class="card">
             <h2>ゲーム制作まとめ</h2>
-            <p>制作したゲームまとめ</p>
 
             <ul class="game-list">
                 <li class="game-item">
@@ -77,6 +77,33 @@
                         <a href="/games/breakout/" class="game-button">
                             ブロック崩しをプレイする
                         </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="card">
+            <h2>アプリ作成</h2>
+            <p>
+                メモアプリや電卓など色んなアプリを作成。
+            </p>
+
+            <ul class="game-list">
+
+                <li class="game-item">
+                    <strong>メモアプリ</strong><br>
+                        使用技術: HTML / JavaScript / TinyMCE / SQLite / Django認証機能(ログイン/ログアウト)<br>
+                        概要<br>
+                        ・アカウント別にメモを保存(ログイン機能も実装)<br>
+                        ・テキスト装飾・画像挿入が可能なメモアプリ<br>
+                        ・ブラウザ上で実際のメモアプリに近い操作感を実現<br>
+                        ・メモの作成・編集・保存が可能<br><br>
+
+                    <a href="{% url 'memoapp:login' %}" class="game-button">
+                        メモアプリ
+                    </a>
+                </li>
+
                 </li>
             </ul>
         </div>

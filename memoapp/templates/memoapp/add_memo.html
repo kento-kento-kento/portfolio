@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% if memo %}メモを編集{% else %}新しいメモを作成{% endif %} - MemoApp
+    </title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .memo-form-card {
+            background: #fff;
+            padding: 24px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #4f46e5;
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4338ca;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="memo-form-card">
+    <h1>
+        {% if memo %}
+            メモを編集
+        {% else %}
+            新しいメモを作成
+        {% endif %}
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title.label_tag }}
+        {{ form.title }}
+
+        {{ form.content.label_tag }}
+        {{ form.content }}
+
+        <button type="submit">
+            {% if memo %}更新する{% else %}保存する{% endif %}
+        </button>
+    </form>
+
+
+    <a href="{% url 'memoapp:memo_home' %}" class="back-link">
+        メモ一覧に戻る
+    </a>
+</div>
+
+<!-- TinyMCE（APIキー不要） -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
+
+<script>
+tinymce.init({
+    selector: '#id_content',
+    height: 300,
+    menubar: false,
+    plugins: 'lists table link image code',
+    toolbar: 'undo redo | bold italic underline | bullist numlist | table link image| code',
+    images_upload_url: '/memo/upload_image/',
+    branding: false
+});
+</script>
+
+
+
+
+</body>
+</html>
