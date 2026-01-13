@@ -4,7 +4,7 @@ venv\Scripts\activate
 deactivate
 
 admin
-パスワードkento0314
+パスワード
 
 利用者
 testuser1 pass1234!
