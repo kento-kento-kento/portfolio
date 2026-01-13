@@ -16,6 +16,9 @@ def score_view(request):
 def billiard(request):
     return render(request,'games/billiard.html')
 
+def breakout(request):
+    return render(request,'games/breakout.html')
+
 @csrf_exempt
 def analyze_view(request):
     if request.method != "POST":
