@@ -13,19 +13,25 @@
 
 </head>
 <body>
-    <header>
+    <header class="site-header">
         <h1>私のゲーム制作ポートフォリオ</h1>
+
+        <!-- ヘッダー内ハンバーガー -->
+        <div class="hamburger" onclick="toggleMenu()">
+            ☰
+        </div>
     </header>
+
     <div class="container">
         
-        <div class="card">
+        <div class="card" id="about">
             <h2>自己紹介</h2>
             <p>
                 大学生。 ゲーム制作やウェブ開発などを学んでいる。
             </p>
         </div>
 
-        <div class="card">
+        <div class="card" id="skills">
             <h2>スキル</h2>
             <ul>
                 <li>プログラミング言語: Python, JavaScript, C#</li>
@@ -45,72 +51,136 @@
             <a href="/webnote/" class="game-button">Web基礎まとめサイトへ</a>
         </div>
 
-        <div class="card">
-            <h2>ゲーム制作まとめ</h2>
+        <div class="card collapsible" id="games">
+            <h2 class="card-title">ゲーム制作まとめ</h2>
 
-            <ul class="game-list">
-                <li class="game-item">
-                    <strong>BLOCK PUZZLE</strong><br>
+            <div class="card-content">
+                <ul class="game-list">
+                    <li class="game-item">
+                        <strong>BLOCK PUZZLE</strong><br>
                         使用技術: HTML / JavaScript / Canvas<br>
                         ブロック配置型パズルゲーム<br><br>
 
-                    <a href="/games/blockpuzzle/" class="game-button">
-                        BLOCK PUZZLE
-                    </a>
-                </li>
+                        <a href="/games/blockpuzzle/" class="game-button">
+                            BLOCK PUZZLE
+                        </a>
+                    </li>
 
-                <li class="game-item">
-                    <strong>ビリヤードゲーム</strong><br>
+                    <li class="game-item">
+                        <strong>ビリヤードゲーム</strong><br>
                         使用技術: Unity / C# / WebGL<br>
                         Unityで制作したビリヤードゲームをブラウザ上でプレイ可能<br><br>
 
                         <a href="/games/billiard/" class="game-button">
                             ビリヤードゲームをプレイする
                         </a>
-                </li>
+                    </li>
 
-                <li class="game-item">
-                    <strong>ブロック崩し</strong><br>
+                    <li class="game-item">
+                        <strong>ブロック崩し</strong><br>
                         使用技術: Unity / C# / WebGL<br>
                         Unityで制作したブロック崩しゲームをブラウザ上でプレイ可能<br><br>
 
                         <a href="/games/breakout/" class="game-button">
                             ブロック崩しをプレイする
                         </a>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
 
 
-        <div class="card">
-            <h2>アプリ作成</h2>
-            <p>
-                メモアプリや電卓など色んなアプリを作成。
-            </p>
+        <div class="card collapsible" id="apps">
+            <h2 class="card-title">アプリ作成</h2>
 
-            <ul class="game-list">
+            <div class="card-content">
+                <p>
+                    メモアプリや電卓など色んなアプリを作成。
+                </p>
 
-                <li class="game-item">
-                    <strong>メモアプリ</strong><br>
-                        使用技術: HTML / JavaScript / TinyMCE / SQLite / Django認証機能(ログイン/ログアウト)<br>
-                        概要<br>
-                        ・アカウント別にメモを保存(ログイン機能も実装)<br>
-                        ・テキスト装飾・画像挿入が可能なメモアプリ<br>
-                        ・ブラウザ上で実際のメモアプリに近い操作感を実現<br>
-                        ・メモの作成・編集・保存が可能<br><br>
+                <ul class="game-list">
+                    <li class="game-item">
+                        <strong>メモアプリ</strong><br>
+                        使用技術: HTML / JavaScript / TinyMCE / SQLite / Django認証機能<br>
+                        ・アカウント別にメモを保存<br>
+                        ・テキスト装飾・画像挿入が可能<br>
+                        ・作成・編集・保存が可能<br><br>
 
-                    <a href="{% url 'memoapp:login' %}" class="game-button">
-                        メモアプリ
-                    </a>
-                </li>
-
-                </li>
-            </ul>
+                        <a href="{% url 'memoapp:login' %}" class="game-button">
+                            メモアプリ
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
+    
+    </div>
 
     <footer>
         <p>Ⓒ 2025 my portfolio</p>
     </footer>
+
+
+<!-- メニュー本体 -->
+<nav class="menu" id="menu">
+    <div class="menu-header">
+        <span class="close-btn" onclick="closeMenu()">×</span>
+    </div>
+    
+    <a href="#about" onclick="toggleMenu()">自己紹介</a>
+    <a href="#skills" onclick="toggleMenu()">スキル</a>
+    <a href="#games" onclick="toggleMenu()">ゲーム制作</a>
+    <a href="#apps" onclick="toggleMenu()">アプリ作成</a>
+
+    <hr>
+
+    <button onclick="toggleDark()">🌙 ダークモード</button>
+
+    <div class="font-size">
+        <button onclick="setFontSize('small')">小</button>
+        <button onclick="setFontSize('medium')">中</button>
+        <button onclick="setFontSize('large')">大</button>
+    </div>
+</nav>
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<script>
+document.querySelectorAll('.collapsible .card-title').forEach(title => {
+    title.addEventListener('click', () => {
+        title.parentElement.classList.toggle('open');
+    });
+});
+
+function openMenu() {
+    document.getElementById('menu').classList.add('open');
+    document.getElementById('menuOverlay').style.display = 'block';
+}
+
+function closeMenu() {
+    document.getElementById('menu').classList.remove('open');
+    document.getElementById('menuOverlay').style.display = 'none';
+}
+
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.contains('open') ? closeMenu() : openMenu();
+}
+
+
+function toggleDark() {
+    document.body.classList.toggle('dark');
+}
+
+function setFontSize(size) {
+    if (size === 'small') {
+        document.body.style.fontSize = '14px';
+    } else if (size === 'medium') {
+        document.body.style.fontSize = '16px';
+    } else {
+        document.body.style.fontSize = '18px';
+    }
+}
+</script>
+
 </body>
 </html>

@@ -4,11 +4,12 @@ body {
         padding: 0;
         background-color: #f4f4f4;
     }
-header {
+.site-header {
         background-color: #333;
         color: white;
         padding: 15px 0;
         text-align: center;
+        position:relative;
     }
 header p {
         margin: 0;
@@ -62,3 +63,134 @@ footer h1{
 .game-item strong {
     font-size: 1.1em;
 }
+
+/* 折りたたみカード */
+.collapsible .card-title {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    padding-right: 24px;
+}
+
+/* ▼ アイコン */
+.collapsible .card-title::after {
+    content: "▼";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.2s ease;
+}
+
+/* 閉じた状態 */
+.collapsible .card-content {
+    display: none;
+    margin-top: 16px;
+}
+
+/* 開いた状態 */
+.collapsible.open .card-content {
+    display: block;
+}
+
+.collapsible.open .card-title::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* ハンバーガー */
+.hamburger {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+
+/* メニュー */
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 260px;
+    height: 100vh;
+    background: white;
+    padding: 20px;
+    box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.menu.open {
+    transform: translateX(0);
+}
+
+
+.menu a {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #333;
+}
+
+.menu button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #4f46e5;
+    color: white;
+    cursor: pointer;
+}
+
+.font-size button {
+    width: 30%;
+    margin-right: 3%;
+}
+
+/* ダークモード */
+body.dark {
+    background: #111827;
+    color: #e5e7eb;
+}
+
+body.dark .card {
+    background: #1f2937;
+}
+
+body.dark .menu {
+    background: #1f2937;
+}
+/* ダークモード時のメニュー文字色 */
+body.dark .menu a {
+    color: #e5e7eb;
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: none;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+    color: #333;
+}
+body.dark .close-btn {
+    color: #ffffff;
+}
+
